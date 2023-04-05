@@ -75,7 +75,7 @@ No different from the Spring MVC REST, except the JSON representation comes by d
 
 It is also no different from Spring MVC, except the following.
 
-### Tomcat Embed Jasper - JSP Dependency
+### Tomcat Embed Jasper - JSP  Dependency
 
 Though the Spring Boot has Tomcat as a default Embedded Container, it does *NOT* have a support for the *JSP* as a View Technology in _MVC_.
 
@@ -179,3 +179,69 @@ Spring cannot decide which one to map for, as it is now an *ambiguous* mapping!
 *Solution*
 
 We need to decide which one to be mapped for the URI pattern - Web Controller or the Rest Controller?
+
+We would prefer to let the `@Controller` take over the responsibility of handling the `http://localhost:8080/` - URI endpoint, than the `@RestController`
+
+*Reason*:
+
+1. Ideally, the URI `http://localhost:8080/`  does *NOT* give any clue or other parts in the URI, it just has a "/". In this case, it will be the good starting point for a Web Controller to show the *Home Page*.
+
+2. For the `@RestController`, we would prefer following the best practices OR the convention of prefixing the URIs for the Rest with `/api/`.
+
+As the `/api` prefix is missing in this URI, the `@Controller` is deemed a best choice.
+
+> *Note*: Legally, any of the controllers can take up this request. There is no hard and fast rule the ONLY a Web Controller can respond to the URIs ending with just a "/", and it is just a commonly agreed practice and the  strategy.
+
+# JPA Vs JDBC
+
+* JDBC - Java Database Connectivity
+* JPA - Java Persistence API
+
+*JDBC*
+
+Using a *Driver* class, we would perform the step by step activities to talk to the database and manipulate the data. JDBC Program is an example.
+
+*JPA*
+
+Java Persistence API is a Specification that helps us achieve the data manipulation into the permanent storage (Database) which is *non-volatile* (sustains the reboots!), via ORM - *Object Relational Mapping*.
+
+> *NOTE* :
+> * `Volatile` - means Temporary. The data stored in the   
+variables of a Program will cease to exist, once the
+Program execution completes.
+> * `Non-Volatile`: means Permanent - the data stored in a
+File System or a Database which will sustain the reboots
+of an Applicaiton or the Server, as the data is not
+stored inside the application, but outside of it.
+
+*ORM*
+
+`ORM` (Object Relational Mapping) is a technique by which we can associate or `map` the information stored in the Database Table - typically we speak about *RDBMS* (`Relation`al Database Managemet System) to the `Object`s in Java.
+
+* Object
+* Relational
+* Mapping
+
+It is a simplified mechanism to ease the Java developers, as they can still continue to be on the Java world, than stepping out to the different world - RDBMS - while dealing with the Databases that are of Relational in nature (RDBMS).
+
+*ORM* Vs *JDBC*
+
+* JDBC lets us talk to the Database via `java.sql` package through the Interfaces (most part) and a few classes - `Connection`, `DriverManager`, `Statement`, `ResultSet` and `SQLException` etc., and we write a lot of Java executable statements to establish a connection and initiate a transaction with the Database, while catching the exceptions thrown if any by the *JDBC Driver*.
+
+> *NOTE*: The JDBC Driver is specific to the Database. We had `mysql-connector-v-x.y.z.jar` for the MySQL Database in a Java Program.
+
+* ORM lets us talk to the Database via plain Java objects, and NOT through the JDBC!
+
+```java
+Person p = new Person("Rama", "Vemulapalli", 26);
+personDAO.save(p); //this line does the *magic* of storing the Domain object into the Table.
+```
+
+*JPA* Vs *ORM*
+
+* ORM  - let us use Java Objects
+* JPA - uses ORM and a *Repository* pattern to have a common set of methods which are frequenly used by a Developer for the *CRUD* operations.
+
+# References
+
+* Application Properties - Official Reference - [https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html)

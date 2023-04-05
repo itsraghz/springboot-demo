@@ -4,16 +4,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.raghsonline.springboot.demo.domain.Person;
 
 @RestController
+@RequestMapping("/api/")
 public class HelloRestController 
 {
 	
-	//@GetMapping("/")
-	public String sayHello()
+	@GetMapping
+	public String sayHello() //URI --> /api/ [http://localhost:8080/api/]
 	{
 		System.out.println("URI - '/' invoked!");
 		
@@ -21,7 +23,7 @@ public class HelloRestController
 				LocalDateTime.now().toString());
 	}
 	
-	@GetMapping("/person")
+	@GetMapping("person") //URI -> /api/person [http://localhost:8080/api/person]
 	public Person getPerson()
 	{
 		Person person = new Person("Raghavan", "Muthu", 41, "raghavan.muthu@gmail.com");
@@ -29,7 +31,7 @@ public class HelloRestController
 		return person;
 	}
 	
-	@GetMapping("/persons")
+	@GetMapping("/persons")//URI -> /api/persons [http://localhost:8080/api/persons]
 	public List<Person> getPersonList()
 	{
 		Person p1 = new Person("Raghavan", "Muthu", 41, "raghavan.muthu@gmail.com");
