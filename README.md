@@ -242,6 +242,150 @@ personDAO.save(p); //this line does the *magic* of storing the Domain object int
 * ORM  - let us use Java Objects
 * JPA - uses ORM and a *Repository* pattern to have a common set of methods which are frequenly used by a Developer for the *CRUD* operations.
 
+# Spring Application flow
+
+## Spring MVC
+
+### Web Flavor (Web Controller - `@Controller`)
+
+```
+Client (UI/Browser) <--> Controller <--> Service <--> Repository/DAO <--> JDBC <--> Database
+```
+
+*Clients*
+
+* Browser that knows to handle the HTML + CSS + Javascript - to deal with the User Inteface
+
+### Restful API Flavor (RestController - `@RestController`)
+
+```
+Client (RestClient) <--> Controller <--> Service <--> Repository/DAO <--> JDBC <--> Database
+```
+*Rest Clients*
+
+* Browser (No UI though)
+* Dedicated Rest Clients
+  - Command line
+    - `cURL`
+    - `HTTPie`
+  - GUI
+    - `Postman`
+    - `Insomnia REST`
+
+## Spring Data JPA
+
+This segment also can have two differnt flavors - Web and Restful.
+
+```
+Client <--> Controller <--> Service <--> Repository/DAO (Spring Data JPA) <--> JDBC <--> Database
+```
+
+> *Note*: The Repository layer is actally served by the Spring Data JPA.
+
+> *JPA* - on top of ORM which indeed acts on top of JBBC where each of them act as a wrapper to the layers below.
+
+## JDBC Vs JPA
+
+### JDBC Concepts - Java Application and Java Database Connectivity (JDBC)
+
+* `Connection`
+* `DriverManager`
+* JDBC `Driver`
+* `Statement` / `PreparedStatement` / `CallableStatement`
+* `ResultSet`
+* `SQLException`
+
+### JDBC Concepts - Database
+
+* `Database`
+* `Schema`
+* `Table`
+* `Column`
+* *Constraints* - Integrity Constraints - UNIQUE, PRIMARY KEY, FOREIGN KEY etc.,
+* Association
+  - `1:1` (One to One)
+  - `1:m` OR `1:n` (One to Many)
+  - `m:1` - (Many To One)
+  - `m:n` - (Many To Many)
+
+> *Note* : MySQL uses both interchangeably, but in other Databases like Oracle, DB2 - these are two different terms where Schema is a logial grouping of tables inside a Database.
+
+### JPA Concepts
+
+| Topic | JDBC | JPA / ORM |
+| ----- | ---- | --------- |
+| Database | `Database` | `Database` |
+| Table | `Table` | `Entity` |
+| Column| `Column` | `Column`|
+
+> *ER Diagram* - Entity Relation Mapping.
+
+## How do we use?
+
+* Using JPA APIs, via Java methods.
+* Using the specialized `Annotations` under `javax.persistence` - as part of the *JPA* API
+  - `@Entity` - apply at a Class level
+  - `@Column` - apply at a Field level inside a class.
+
+## JPA Vs Hibernate
+
+* *JPA* is a specification - conceptual level
+* *Hiberate* is an implementation of the specification.
+
+Ideally you would need Hibernat JAR file to use this JPA in the Application.
+
+> *Note*: Hibernate is one of the many implementations the JPA Specification - example, EclipseLink, iBatis, Open JPA etc., . However it gained a lot of popularity than others in the market.
+
+## JTA
+
+*JTA* stands for *Java Transaction API*. It just has the API to manage the transactions in order to maintain the *ACID* properies
+
+* *A* - `Atomicity`
+* *C* - `Consistency`
+* *I* - `Integrity`
+* *D* - `Durability`
+
+> *jboss-transaction-api - This is an implementation of the JTA API.
+
+| Sl No | Specification | Implementation  | Remarks |
+| ----- | ------------- | --------------- | ------- |
+| 1     | *JPA* - says ONLY `what`   | *Hibernate - ORM*  - says about `how`!!  |
+| 2     | *JTA*    | *JBos Transaction API* | *Hibernate - ORM*  - says about `how`!! |
+
+## Steps to use Spring Data JPA
+
+1. Declare the dependencies in the `pom.xml` file of the Maven project - with Spring Data Starter, MySQL JDBC Connector.
+
+2. Update the Maven Project
+
+3. Declare a class with `@Entity` and approrpriate `@Column ` Annotations
+  - *Rule*; At least one member of the Entity class should be annotated with the `@Id` of type `javax.persistence`!
+
+4. Specify the property / configurable values in the `appilcation.properites` for specifying the JDBC URL, Username, Password etc, for the database we intend to use - MySQL here.
+
+```java
+## ---------------------------------------------------------
+## Database related properties
+## ---------------------------------------------------------
+# Remember, if you use a non-embedded database like MySQL,
+# the database must be created first. Only for embedded databases
+# like H2, HSQL etc., the database gets created automatically.
+spring.datasource.url=jdbc:mysql://localhost:3306/springboot_jpa
+spring.datasource.username=raghs
+spring.datasource.password=RaghsMySQL12#
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+#spring.jpa.show-sql: true
+spring.jpa.hibernate.ddl-auto=update
+## Hibernate Properties
+# The SQL dialect makes Hibernate generate better SQL for the chosen database
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+```
+
+5. Invoke the relevant APIs from Spring Boot in the Test Class
+
+6. Execute the Code.
+
 # References
 
 * Application Properties - Official Reference - [https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html)

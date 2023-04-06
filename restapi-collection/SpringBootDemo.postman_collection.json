@@ -1,0 +1,70 @@
+{
+	"variables": [],
+	"info": {
+		"name": "SpringBoot Demo",
+		"_postman_id": "7a33d8da-42e1-d1e2-96b4-6ec139dd1136",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "HelloRestController",
+			"description": "",
+			"item": [
+				{
+					"name": "/api/person",
+					"request": {
+						"url": "http://localhost:9009/api/person",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Arun\",\n    \"lastName\": \"Prasad\",\n    \"age\": 24,\n    \"email\": \"arun.prasad@gmail.com\"\n}"
+						},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				},
+				{
+					"name": "/api/person",
+					"request": {
+						"url": "http://localhost:9009/api/person",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				},
+				{
+					"name": "/api/person/{id}",
+					"request": {
+						"url": "http://localhost:9009/api/person/1",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				},
+				{
+					"name": "/api/persons/",
+					"request": {
+						"url": "http://localhost:9009/api/persons",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
