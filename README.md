@@ -386,6 +386,98 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialec
 
 6. Execute the Code.
 
+# Transactions - Theory
+
+A boundary that specifies/ demarcates the list of the operations which should be treated for the Transaction, which can take any of the two forms.
+
+* `Commit` - Permanently store the changes into DB
+* `Rollback` - revert back to the older stage if there is a failure or uncertainty.
+
+```
+Client <--> Server (Controller) <--> Service <--> Repository <--> JDBC  <---> Database
+```
+
+*Commit*
+
+```
+Client <--> Server (Controller) <--> Service <--> Repository <--> JDBC  <---> Database <--> [V1.0]
+Client <--> Server (Controller) <--> Service <--> Repository <--> JDBC  <---> Database <--> [v1.1] (Confirm the transactions permanently, v1.0 becomes 1.1)
+```
+
+*Rollback*
+
+```
+Client <--> Server (Controller) <--> Service <--> Repository <--> JDBC  <---> Database <--> [V1.0]
+Client <--> Server (Controller) <--> Service <--> Repository <--> JDBC  <---> Database <--> [v1.1] Perform the operation
+Client <--> Server (Controller) <--> Service <--> Repository <--> JDBC  <---> Database <--> Error happens
+Client <--> Server (Controller) <--> Service <--> Repository <--> JDBC  <---> Database <--> [V1.0] (Rollback to the previous snapshot/version)
+```
+
+## Example of a Transaction
+
+Let us say a banking transaction for a fund transfer example, we perform the following operations
+
+```
+1. Get the Source and Target Accounts, Amount to transfer
+2. Check the Account Balance in the Source Account and ensure that it has got the sufficient amount to withdraw/transfer.
+  2. a. If there is an error, cancel the transaction and exit.
+  2. b. If so, transfer the funds from Source to Target Account as follows.
+3. Perform a Debit operation in the Source Account of X amount.
+4. Perform a Credit operation in the Target Accunt for X Amount.
+5. If there is an error while performing any of the steps 4 or 5, we should revert (rollback) the transaction and keep the balance in both of the accounts intact.
+```
+
+### Steps to Notice
+
+1. Bring the two critical transactions (Debit and Credit) - into the *Transactional Boundary* (mark them with `@Transaction`)
+2. These two will be separate DB calls to the Repository from the *Service* layer OR the Controller Layer.
+3. Preferred to have a *Service Layer* which can help us do the `@Transactional` operations.
+
+*Repository Layer*
+
+```java
+@Repository
+public class AccountDao [AccountRepository]
+{
+  public boolean checkBalance(String acctNo, long amount)
+  {
+    //logic to check the balance in the account and it is permitted to be trasacted on the `amount`
+    return true;
+  }
+  public void withdrawFunds(String acctNo, long amount)
+  {
+    //transaction to withdraw amount from the acctNo.
+  }
+
+  public void addFunds(String acctNo, long amount)
+  {
+    //transaction to add amount to acctNo.
+  }
+}
+```
+*Service Layer*
+
+```java
+@Service
+public class AccountService
+{
+  @Autowired
+  public AccountRepository acctRepoistory;
+
+  @Transactional
+  public void fundTransfer(String srcAcct, String targetAcct, long amount)
+  {
+    //0. checkBalance
+    acctRepository.checkBalance(srcAcct);
+    //1.withdraw
+    acctRepoistory.withdrawFunds(srcAcct, amount);
+    //2. add
+    acctRepoistory.addFunds(targetAcct, amount);
+  }
+}
+
+
+
 # References
 
 * Application Properties - Official Reference - [https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html)

@@ -1,5 +1,6 @@
 package com.raghsonline.springboot.demo.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,11 +11,19 @@ public class Person
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "Id")
 	private int id;
 	
+	@Column(name = "FirstName")
 	private String firstName;
+	
+	@Column(name = "LastName")
 	private String lastName;
+	
+	@Column(name = "Age")
 	private int age;
+	
+	@Column(name = "Email")
 	private String email;	
 
 	public Person() {
