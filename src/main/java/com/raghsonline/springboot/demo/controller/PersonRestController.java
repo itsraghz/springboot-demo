@@ -54,7 +54,7 @@ public class PersonRestController
 		System.out.println("Person object Inserted : " + personInserted);
 		
 	}
-	
+
 	@GetMapping("/{id}")
 	public Person getPersonById(@PathVariable int id)
 	{

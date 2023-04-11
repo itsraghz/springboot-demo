@@ -468,7 +468,7 @@ public class AccountService
   public void fundTransfer(String srcAcct, String targetAcct, long amount)
   {
     //0. checkBalance
-    acctRepository.checkBalance(srcAcct);
+    acctRepository.checkBalance(srcAcct, amount);
     //1.withdraw
     acctRepoistory.withdrawFunds(srcAcct, amount);
     //2. add
@@ -476,6 +476,29 @@ public class AccountService
   }
 }
 ```
+
+## `spring.jpa.hibernate.ddl-auto`
+
+This property `spring.jpa.hibernate.ddl-auto` specified in the `application.properties` file is equivalent to `hibernate.hbm2ddl.auto` in the `persistence.xml` file in the earlier scenarios when we work with Hibernate direcly from a Java application.
+
+It takes the following values as modes.
+
+| Sl # | Mode / Attribute | Description | Default |
+| ---- | ---------------- | ----------- | ------- |
+| 1    | `create` |  Create the schema and destroy previous data.  | N  |
+| 2     | `create-drop` | Create and then destroy the schema at the end of the session.  |  `Y` when we use the *Embedded DB* like `h2`, `HSQL` or `Derby` etc., and when no schema manager was detected   |
+| 3     | `update` | Update the schema if necessary. <br/><br/> Most preferred in Production, as this will UPDATE the Table Structure ONLY when there is a structure change in the DDL statements declared in the Java Entities  | N  |
+| 4     | `validate` |  Validate the schema, make no changes to the database. <br/><br/> It will actually compare the Database schema and the Java classes marked with the JPA Annotations like `@Entity`, `@Column`, `@OneToMany`, `@ManyToOne` for associations, it would throw an error and stop if there are changes. Otherwise, it does nothing.   | N  |
+| 5    | `none` |  Disable DDL handling | *Y* when no attribute is specified and the database is a non-embedded one.  |
+
+## JPA Repository Interface Hierarchy
+
+*Note* : Base Package for all the Interfaces and Classes : `org.springframework.data.repository`
+
+| Type | Parent | Actual class | Methods | Remarks |
+| ---- | ------ | ------------ | ------- | ------- |
+| I (Interface) | None | `Repository<T, ID>` | None | Marker Interface, and hence no methods declared. <br/><br/> <ul><li> `T` - the actual Type / Domain. </li> <li> `ID` is the data type of the Primary Key / ID field.</li></ul> |
+| I (Interface) | `Repository` | `CrudRepository<T, ID>` | <ul><li>`save(Entity s)` &rarr; `T`</li><li>`saveAll(Iterable<T>)` &rarr; `Iterable<T>`</li><li>`findById(ID)` &rarr; `Optional<T>` (may not be present)</li><li>`existsById(ID)` &rarr;  `boolean`</li><li>`findAll()` &rarr; `Iterable<T>`</li><li>`findByAllId(ID)` &rarr; `Iterable<T>`</li><li>`count()` &rarr; `long`</li><li>`deleteByID(ID)` &rarr; `void`</li><li>`delete(T)` &rarr; `void`</li><li>`deleteAllById(Iterable<T>)` &rarr; `void`</li><li>`deleteAll(Iterable<T>)` &rarr; `void`</li><li>`deleteAll()` &rarr; `void` (equivalent to `TRUNCATE`)</ul> | All methods are related to the CRUD Operations, and all are *self-explanatory* <br/><br/> The actual implementation class is `SimpleJpaRepository` which is defined in a sub package `org.springframework.data.jpa.repository.support`, and has the default implementation for all the methods declared in the `CrudRepository` Interface, that it *implements*. |
 
 # References
 
