@@ -1,0 +1,422 @@
+{
+	"info": {
+		"_postman_id": "2b20c054-973e-4039-8454-19c0395bc561",
+		"name": "Spring Boot Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "HelloRestController",
+			"item": [
+				{
+					"name": "sayHello",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PersonRestController",
+			"item": [
+				{
+					"name": "getPersonSample",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/person",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPersonListSample",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/sample",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"sample"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPersonById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkPersonById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/searchById/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"searchById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPersonByEmail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/search/rama.v@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"search",
+								"rama.v@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPersonList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPersonCount",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/getCount",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"getCount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAllByIds",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/getPersonsById",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"getPersonsById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createPerson",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Rama\",\r\n    \"lastName\": \"Vemulapalli\",\r\n    \"age\" : 27,\r\n    \"email\": \"rama.v@gmail.com\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9009/api/persons/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createPersons",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\r\n    \"firstName\": \"Viswanadham\",\r\n    \"lastName\": \"Vemulapalli\",\r\n    \"age\" : 57,\r\n    \"email\": \"viswanadham.vemulapalli@gmail.com\"\r\n},\r\n{\r\n    \"firstName\": \"Sujatha\",\r\n    \"lastName\": \"Vemulapalli\",\r\n    \"age\" : 54,\r\n    \"email\": \"sujatha.vemulapalli@gmail.com\"\r\n},\r\n{\r\n    \"firstName\": \"Harika\",\r\n    \"lastName\": \"Vemulapalli\",\r\n    \"age\" : 32,\r\n    \"email\": \"harika.vemulapalli@gmail.com\"\r\n}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9009/api/persons/addPersons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"addPersons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePerson",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 1,\r\n    \"firstName\": \"Rama #updated\",\r\n    \"lastName\": \"Vemulapalli\",\r\n    \"age\" : 27,\r\n    \"email\": \"rama.v@gmail.com\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9009/api/persons/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePersonById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePerson",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"id\": 4,\r\n        \"firstName\": \"Harika\",\r\n        \"lastName\": \"Vemulapalli\",\r\n        \"age\": 32,\r\n        \"email\": \"harika.vemulapalli@gmail.com\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9009/api/persons/deletePerson",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"deletePerson"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAllById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/deleteAllById",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"deleteAllById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePersons",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\r\n    \"id\" : 2,\r\n    \"firstName\": \"Viswanadham\",\r\n    \"lastName\": \"Vemulapalli\",\r\n    \"age\" : 57,\r\n    \"email\": \"viswanadham.vemulapalli@gmail.com\"\r\n},\r\n{\r\n    \"id\" : 3,\r\n    \"firstName\": \"Sujatha\",\r\n    \"lastName\": \"Vemulapalli\",\r\n    \"age\" : 54,\r\n    \"email\": \"sujatha.vemulapalli@gmail.com\"\r\n},\r\n{\r\n    \"id\" : 3,\r\n    \"firstName\": \"Sujatha\",\r\n    \"lastName\": \"Vemulapalli\",\r\n    \"age\" : 54,\r\n    \"email\": \"sujatha.vemulapalli@gmail.com\"\r\n}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9009/api/persons/deletePersons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"deletePersons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAll",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
