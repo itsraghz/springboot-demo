@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "e1afd37e-fac0-4683-aafc-5f5a216456fd",
+		"name": "SpringBoot Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "HelloRestController",
+			"item": [
+				{
+					"name": "/api/persons",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\" : \"0\",\n        \"firstName\": \"Milvik\",\n        \"lastName\": \"Bima\",\n        \"age\": 13,\n        \"email\": \"milvik.bima@gmail.com\"\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:9009/api/persons/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								""
+							]
+						},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				},
+				{
+					"name": "/api/addPersons",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\" : \"0\",\n        \"firstName\": \"Rama\",\n        \"lastName\": \"Vemullapalli\",\n        \"age\": 28,\n        \"email\": \"rama.v@gmail.com\"\n    },\n    {\n        \"id\" : \"0\",\n        \"firstName\": \"Raghvan\",\n        \"lastName\": \"Muthu\",\n        \"age\": 46,\n        \"email\": \"raghvan.muthu@gmail.com\"\n    },\n    {\n        \"id\" : \"0\",\n        \"firstName\": \"Arun\",\n        \"lastName\": \"Gubbala\",\n        \"age\": 24,\n        \"email\": \"arun.g@gmail.com\"\n    },\n    {\n        \"id\" : \"0\",\n        \"firstName\": \"Karthik\",\n        \"lastName\": \"HK\",\n        \"age\": 23,\n        \"email\": \"karthik.HK@gmail.com\"\n    },\n    {\n        \"id\" : \"0\",\n        \"firstName\": \"Thejaswini\",\n        \"lastName\": \"RN\",\n        \"age\": 27,\n        \"email\": \"teju.RN@gmail.com\"\n    }\n]"
+						},
+						"url": {
+							"raw": "http://localhost:9009/api/persons/addPersons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"addPersons"
+							]
+						},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				},
+				{
+					"name": "/api/persons/update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\" : \"8\",\n    \"firstName\": \"Rama Updated\",\n    \"lastName\": \"Vemullapalli\",\n    \"age\": 28,\n    \"email\": \"rama.v@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9009/api/persons/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								""
+							]
+						},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				},
+				{
+					"name": "/api/persons/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								""
+							]
+						},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				},
+				{
+					"name": "/api/person/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"8"
+							]
+						},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				},
+				{
+					"name": "/api/persons/exists/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								""
+							]
+						},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				},
+				{
+					"name": "/api/persons/findAllById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9009/api/persons/findAllById/2,3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"findAllById",
+								"2,3"
+							]
+						},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				},
+				{
+					"name": "/api/persons/count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/count",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"count"
+							]
+						},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				},
+				{
+					"name": "/api/persons/deleteById/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"delete",
+								"1"
+							]
+						},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				},
+				{
+					"name": "/api/persons/deletePerson",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9009/api/persons/deletePerson",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"deletePerson"
+							]
+						},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				},
+				{
+					"name": "/api/persons/deleteAllById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9009/api/persons/deleteAllById/2,3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"deleteAllById",
+								"2,3"
+							]
+						},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				},
+				{
+					"name": "/api/persons/deleteAll",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9009/api/persons/deleteAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9009",
+							"path": [
+								"api",
+								"persons",
+								"deleteAll"
+							]
+						},
+						"description": "API to invoke the URI /api/hello "
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

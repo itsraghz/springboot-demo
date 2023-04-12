@@ -3,11 +3,14 @@ package com.raghsonline.springboot.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.raghsonline.springboot.demo.domain.Person;
@@ -54,6 +57,26 @@ public class PersonRestController
 		System.out.println("Person object Inserted : " + personInserted);
 		
 	}
+	
+	@PostMapping("/addPersons")
+	public void addPersons(@RequestBody List<Person> personList)
+	{
+		System.out.println("POST - /addPersons invoked!");
+		System.out.println("Person List received : " + personList);
+		List<Person> personsInserted = personRepository.saveAll(personList);
+		System.out.println("Persons Inserted : " + personsInserted);
+	}
+	
+	@PutMapping
+	public void updatePerson(@RequestBody Person person)
+	{
+		System.out.println("Put - /person invoked!");
+		System.out.println("Person object received : " + person);
+		
+		Person personUpdated = personRepository.save(person);
+		System.out.println("Person object Updated : " + personUpdated);
+		
+	}
 
 	@GetMapping("/{id}")
 	public Person getPersonById(@PathVariable int id)
@@ -88,4 +111,62 @@ public class PersonRestController
 		
 		return personList;
 	}
+	
+	@GetMapping("/exists/{id}")
+	public boolean existsById(@PathVariable int id)
+	{
+		System.out.println("\"GET - /api/persons/exists/{id} invoked\"");
+		boolean person = personRepository.existsById(id);
+		return person;
+	}
+	
+	@GetMapping("/findAllById/{ids}")
+	public List<Person> findByAllId(@PathVariable List<Integer> ids)
+	{
+		System.out.println("\"GET - /api/persons/findAllById - invoked\"");
+		List<Person> personList = personRepository.findAllById(ids);
+		return personList;
+	}
+	
+	@GetMapping("/count")
+	public long getPersonCount()
+	{
+		System.out.println("GET - /api/persons/count invoked!");
+		
+		long count = personRepository.count();
+		System.out.println("Person object count : " + count);
+		
+		return count;
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public void deletePersonById(@PathVariable int id)
+	{
+		System.out.println("Delete - /api/person/delete/{id} invoked!, id="+id);
+		personRepository.deleteById(id);
+	}
+	
+	@DeleteMapping("/deletePerson")
+	public void deletePerson(@RequestBody Person person)
+	{
+		System.out.println("DELETE - /person invoked!");
+		System.out.println("Person object received : " + person);
+		personRepository.delete(person);
+
+	}
+	
+	@DeleteMapping("/deleteAllById/{ids}")
+	public void deleteAllById(@PathVariable List<Integer> ids)
+	{
+		System.out.println("\"Delete - /api/persons/deleteAllById - invoked\"");
+		personRepository.deleteAllById(ids);
+	}
+	
+	@DeleteMapping("/deleteAll")
+	public void deleteAll()
+	{
+		System.out.println("Delete - /api/person/deleteAll invoked!");
+		personRepository.deleteAll();
+	}
+	
 }
