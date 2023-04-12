@@ -67,8 +67,6 @@ public class PersonRestController
 		
 	}
 	
-	
-
 	@GetMapping("/{id}")
 	public Person getPersonById(@PathVariable int id)
 	{
