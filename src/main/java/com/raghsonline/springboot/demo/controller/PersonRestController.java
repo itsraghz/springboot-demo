@@ -67,6 +67,8 @@ public class PersonRestController
 		
 	}
 	
+	
+
 	@GetMapping("/{id}")
 	public Person getPersonById(@PathVariable int id)
 	{
@@ -101,10 +103,10 @@ public class PersonRestController
 		return personList;
 	}
 	
-	@GetMapping("/searchById/{id}")
+	@GetMapping("/checkPersonById/{id}")
 	public boolean checkPersonById(@PathVariable int id)
 	{
-		System.out.println("GET - /api/person//search/{id} invoked!, id="+id);
+		System.out.println("GET - /api/person/checkPersonById/{id} invoked!, id="+id);
 		boolean isPersonPresent = personRepository.existsById(id);
 		System.out.println("isPersonPresent : " + isPersonPresent);
 		return isPersonPresent;
@@ -119,12 +121,11 @@ public class PersonRestController
 		System.out.println("Persons Inserted : " + personsInserted);
 	}
 	
-	@GetMapping("/getPersonsById")
-	public List<Person> findAllByIds()
+	@GetMapping("/findAllById/{ids}")
+	public List<Person> findAllById(@PathVariable List<Integer> ids)
 	{
-		System.out.println("GET - /api/person/getPersonsById invoked!");
-		List<Integer> personIds = List.of(1, 2, 3, 4);
-		List<Person> personList = personRepository.findAllById(personIds);
+		System.out.println("GET - /api/person/findAllById/{ids} invoked!");
+		List<Person> personList = personRepository.findAllById(ids);
 		return personList;
 	}
 	
@@ -152,12 +153,11 @@ public class PersonRestController
 		
 	}
 	
-	@DeleteMapping("/deleteAllById")
-	public void deleteAllById()
+	@DeleteMapping("/deleteAllById/{ids}")
+	public void deleteAllById(@PathVariable List<Integer> ids)
 	{
-		System.out.println("GET - /api/person/deleteAllById invoked!");
-		List<Integer> personIds = List.of(2, 3);
-		personRepository.deleteAllById(personIds);
+		System.out.println("GET - /api/person/deleteAllById{ids} invoked!");
+		personRepository.deleteAllById(ids);
 	}
 	
 	@DeleteMapping("/deletePersons")
