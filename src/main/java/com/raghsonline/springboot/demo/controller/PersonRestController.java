@@ -3,9 +3,11 @@ package com.raghsonline.springboot.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,8 +54,20 @@ public class PersonRestController
 		
 		Person personInserted = personRepository.save(person);
 		System.out.println("Person object Inserted : " + personInserted);
+	}
+	
+	@PutMapping
+	public void updatePerson(@RequestBody Person person)
+	{
+		System.out.println("PUT - /person invoked!");
+		System.out.println("Person object received : " + person);
+		
+		Person personUpdated = personRepository.save(person);
+		System.out.println("Person object Inserted : " + personUpdated);
 		
 	}
+	
+	
 
 	@GetMapping("/{id}")
 	public Person getPersonById(@PathVariable int id)
@@ -88,4 +102,79 @@ public class PersonRestController
 		
 		return personList;
 	}
+	
+	@GetMapping("/searchById/{id}")
+	public boolean checkPersonById(@PathVariable int id)
+	{
+		System.out.println("GET - /api/person//search/{id} invoked!, id="+id);
+		boolean isPersonPresent = personRepository.existsById(id);
+		System.out.println("isPersonPresent : " + isPersonPresent);
+		return isPersonPresent;
+	}
+	
+	@PostMapping("/addPersons")
+	public void addPersons(@RequestBody List<Person> personList)
+	{
+		System.out.println("POST - /addPersons invoked!");
+		System.out.println("Person List received : " + personList);
+		List<Person> personsInserted = personRepository.saveAll(personList);
+		System.out.println("Persons Inserted : " + personsInserted);
+	}
+	
+	@GetMapping("/getPersonsById")
+	public List<Person> findAllByIds()
+	{
+		System.out.println("GET - /api/person/getPersonsById invoked!");
+		List<Integer> personIds = List.of(1, 2, 3, 4);
+		List<Person> personList = personRepository.findAllById(personIds);
+		return personList;
+	}
+	
+	@GetMapping("/getCount")
+	public long getCount()
+	{
+		System.out.println("GET - /api/person/getCount invoked!");
+		long count = personRepository.count();
+		return count;
+	}
+	
+	@DeleteMapping("/{id}")
+	public void deletePersonById(@PathVariable int id)
+	{
+		System.out.println("DELETE - /api/person/{id} invoked!, id="+id);
+		personRepository.deleteById(id);
+	}
+	
+	@DeleteMapping("/deletePerson")
+	public void deletePerson(@RequestBody Person person)
+	{
+		System.out.println("DELETE - /person invoked!");
+		System.out.println("Person object received : " + person);
+		personRepository.delete(person);
+		
+	}
+	
+	@DeleteMapping("/deleteAllById")
+	public void deleteAllById()
+	{
+		System.out.println("GET - /api/person/deleteAllById invoked!");
+		List<Integer> personIds = List.of(2, 3);
+		personRepository.deleteAllById(personIds);
+	}
+	
+	@DeleteMapping("/deletePersons")
+	public void deletePersons(@RequestBody List<Person> personList)
+	{
+		System.out.println("DELETE - /deletePersons invoked!");
+		System.out.println("Person List received : " + personList);
+		personRepository.deleteAll(personList);
+	}
+	
+	@DeleteMapping
+	public void deleteAll()
+	{
+		System.out.println("DELETE - /deleteAll invoked!");
+		personRepository.deleteAll();
+	}
+	
 }
